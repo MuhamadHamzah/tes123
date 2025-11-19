@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .cursor-dot {
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .cursor-dot.cursor-hover {
+    transform: scale(1.5) !important;
+    background-color: #FF006E !important;
+    filter: drop-shadow(0 0 15px #FF006E) !important;
+  }
+  
+  .cursor-trail {
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .cursor-trail.cursor-hover {
+    transform: scale(1.2) !important;
+    border-color: #FF006E !important;
+    background-color: rgba(255, 0, 110, 0.1) !important;
+  }
+  
+  .scroll-animate {
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .text-shadow-glow {
+    text-shadow: 0 0 20px currentColor;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #00D2FF, #6C5CE7);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #FF006E, #00D2FF);
+  }
+  
+  /* Selection styles */
+  ::selection {
+    background: rgba(0, 210, 255, 0.3);
+    color: white;
+  }
+  
+  ::-moz-selection {
+    background: rgba(0, 210, 255, 0.3);
+    color: white;
+  }
+  
+  /* Disable cursor on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .cursor-dot,
+    .cursor-trail {
+      display: none !important;
+    }
+  }
+  
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float-1,
+    .animate-float-2,
+    .animate-float-3,
+    .animate-pulse-slow,
+    .animate-pulse-slow-delayed,
+    .animate-pulse-slow-delayed-2,
+    .animate-rotate-slow {
+      animation: none !important;
+    }
+    
+    .scroll-animate {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    
+    .cursor-dot,
+    .cursor-trail {
+      display: none !important;
+    }
+  }
+  
+  /* Glass effect enhancements */
+  .glass-enhanced {
+    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Button hover effects */
+  .btn-glow:hover {
+    box-shadow: 
+      0 0 20px rgba(0, 210, 255, 0.4),
+      0 0 40px rgba(0, 210, 255, 0.2),
+      0 0 60px rgba(0, 210, 255, 0.1);
+  }
+  
+  /* Loading animation */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+}
+
+/* Custom keyframes for enhanced animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(0, 210, 255, 0.6);
+  }
+}
+
+@keyframes float1 {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  33% { 
+    transform: translateY(-20px) rotate(120deg) scale(1.1);
+  }
+  66% { 
+    transform: translateY(-10px) rotate(240deg) scale(0.9);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% { 
+    transform: translateY(-30px) rotate(-180deg) scale(1.2);
+  }
+}
+
+@keyframes float3 {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% { 
+    transform: translateY(-15px) rotate(90deg) scale(0.8);
+  }
+  75% { 
+    transform: translateY(-25px) rotate(270deg) scale(1.1);
+  }
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #00D2FF;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-white\/70 {
+    color: rgb(255 255 255 / 0.9) !important;
+  }
+  
+  .text-white\/60 {
+    color: rgb(255 255 255 / 0.8) !important;
+  }
+  
+  .border-white\/20 {
+    border-color: rgb(255 255 255 / 0.4) !important;
+  }
+}
